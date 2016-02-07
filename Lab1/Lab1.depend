@@ -1,12 +1,17 @@
 # depslib dependency file v1.0
-1454879458 source:x:\development\cosc320\lab1\main.cpp
+1454885505 source:x:\development\cosc320\lab1\main.cpp
 	<iostream>
 	<list>
+	"src/InsertionSorter.cpp"
 
-1454881360 source:x:\development\cosc320\lab1\src\insertionsorter.cpp
+1454884919 source:x:\development\cosc320\lab1\src\insertionsorter.cpp
 	"Sorter.h"
 	<list>
 
-1454882674 x:\development\cosc320\lab1\include\sorter.h
+1454884930 x:\development\cosc320\lab1\include\sorter.h
 	"stddef.h"
+
+1454884919 x:\development\cosc320\lab1\src\insertionsorter.cpp
+	"Sorter.h"
+	<list>
 

@@ -4,21 +4,49 @@
 #include "src/InsertionSorter.cpp"
 
 template <size_t size>
-void fillArrayAscending(int arr[size]) {
-    int ret[size], i;
-    for (i = 0; i < size;) {
-        ret[i] = ++i;
+void fillAscending(int arr[size]) {
+    for (int i = 0; i < size;) {
+        arr[i] = ++i;
     }
+}
+
+template <size_t size>
+void fillDescending(int arr[size]) {
+    for (int i = size; i > 0;) {
+        arr[i - 1] = i--;
+    }
+}
+
+template <size_t size>
+void print(int arr[size]) {
+    std::cout << "[";
+    for (int i = 0; i < size; i++) {
+        std::cout << arr[i];
+        if (i != size - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << "]" << std::endl;
+}
+
+template<size_t size>
+void sort(int arr[size], Sorter<int, size>& sorter) {
+    std::cout << "Before sort:" << std::endl << "\t";
+    print<size>(arr);
+    sorter.sort(arr);
+    std::cout << "After sort:" << std::endl << "\t";
+    print<size>(arr);
+    std::cout << "Operations: " << sorter.getOpCount() << std::endl;
 }
 
 int main()
 {
-    int thru20[20];
-    fillArrayAscending<20>(thru20);
-
+    int arr[20] = {0};
     InsertionSorter<20> sorter;
 
-    sorter.sort(thru20);
+    fillAscending<20>(arr);
+    sort(arr, sorter);
 
-    std::cout << "Operations: " << sorter.getOpCount() << std::endl;
+    fillDescending<20>(arr);
+    sort(arr, sorter);
 }

@@ -1,0 +1,4 @@
+# Debug objects and executables 
+
+*.o
+*.exe

@@ -7,15 +7,12 @@ template <typename T, size_t N>
 class Sorter
 {
 public:
-    Sorter(const int* ops)
-    {
-        opCount = ops;
-    }
+    Sorter();
     virtual ~Sorter();
     virtual void sort(T li[N]) = 0;
-    int getOpCount() { return *opCount; }
+    int getOpCount() { return opCount; }
 protected:
-    int* opCount;
+    int opCount;
 };
 
 #endif // SORTER_H

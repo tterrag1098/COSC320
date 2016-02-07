@@ -16,9 +16,7 @@ int main()
     int thru20[20];
     fillArrayAscending<20>(thru20);
 
-    int* ops;
-
-    InsertionSorter<20> sorter(ops);
+    InsertionSorter<20> sorter;
 
     sorter.sort(thru20);
 

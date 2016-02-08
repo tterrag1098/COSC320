@@ -10,6 +10,7 @@
 
 #define end1 std::endl
 #define end2 std::endl << std::endl
+#define section "==============================================="
 
 // Fills a given array with ascending integers from 1 to size
 template <size_t size>
@@ -64,12 +65,12 @@ void print(int arr[size])
 template<size_t size>
 void sort(int arr[size], Sorter<int, size>* sorter)
 {
-    out << "Before sort:" << end1 << "\t";
+    out << "\tBefore sort: ";
     print<size>(arr);
     sorter->sort(arr);
-    out << "After sort:" << end1 << "\t";
+    out << "\tAfter sort: ";
     print<size>(arr);
-    out << "Operations: " << sorter->getOpCount() << end2;
+    out << "\tOperations: " << sorter->getOpCount() << end2;
 }
 
 // Tests a sorter, printing out its name/size, and the type of each test
@@ -78,26 +79,28 @@ void test(Sorter<int, size>* sorter)
 {
     int arr[size] = {0};
 
-    out << sorter->getName() << " sort, with " << size << " elements:" << end1;
+    out << sorter->getName() << " sort, with " << size << " elements:" << end2;
 
-    out << "Ascending order:" << end2;
+    out << "Ascending order:" << end1;
     fillAscending<size>(arr);
     sort(arr, sorter);
 
-    out << "Descending order:" << end2;
+    out << "Descending order:" << end1;
     fillDescending<size>(arr);
     sort(arr, sorter);
 
-    out << "Random order:" << end2;
+    out << "Random order:" << end1;
     fillRandom<size>(arr);
     sort(arr, sorter);
 
+    out << section << end2;
     delete sorter;
 }
 
 int main()
 {
     out.open("output.txt");
+    out << section << end2;
 
     test(new InsertionSorter<20>());
     test(new InsertionSorter<100>());

@@ -16,14 +16,11 @@ public:
 protected:
     void reset() { opCount = 0; }
     void op() { opCount++; }
-    void swap(T& a, T&b)
+    void swap(T& a, T& b)
     {
         T temp = a;
-        op();
         a = b;
-        op();
         b = temp;
-        op();
     }
 private:
     int opCount;

@@ -8,26 +8,26 @@
 	"src/BubbleSorter.cpp"
 	"src/MergeSorter.cpp"
 
-1454888385 source:x:\development\cosc320\lab1\src\insertionsorter.cpp
+1454962400 source:x:\development\cosc320\lab1\src\insertionsorter.cpp
 	"Sorter.h"
 
-1454906243 x:\development\cosc320\lab1\include\sorter.h
+1454962454 x:\development\cosc320\lab1\include\sorter.h
 	"stddef.h"
 	<string>
 
 1454905586 x:\development\cosc320\lab1\src\insertionsorter.cpp
 	"Sorter.h"
 
-1454888823 source:x:\development\cosc320\lab1\src\selectionsorter.cpp
+1454962116 source:x:\development\cosc320\lab1\src\selectionsorter.cpp
 	<Sorter.h>
 
 1454905594 x:\development\cosc320\lab1\src\selectionsorter.cpp
 	<Sorter.h>
 
-1454897245 source:x:\development\cosc320\lab1\src\bubblesorter.cpp
+1454962437 source:x:\development\cosc320\lab1\src\bubblesorter.cpp
 	<Sorter.h>
 
-1454903543 source:x:\development\cosc320\lab1\src\mergesorter.cpp
+1454962337 source:x:\development\cosc320\lab1\src\mergesorter.cpp
 	<Sorter.h>
 
 1454905590 x:\development\cosc320\lab1\src\bubblesorter.cpp

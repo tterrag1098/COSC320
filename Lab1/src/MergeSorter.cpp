@@ -23,6 +23,8 @@ private:
         int idx2 = mid;
         for (int i = low; i < high; i++)
         {
+            // One operation per loop
+            this->op();
             // Cache the values for cleaner code
             int left = li[idx1], right = li[idx2];
             // If we are not done with the left list, or we ARE done with the right list, this block will always be used
@@ -40,12 +42,25 @@ private:
                 work[i] = right;
                 idx2++;
             }
+            // One guaranteed operation
             this->op();
+            // Go through the potentially short-circuited comparisons
+            // If idx1 is finished, we must have done more than one comparison
+            if (idx1 >= mid)
+            {
+                this->op();
+                // If the idx2 is not finished, 3 comparisons were done, so add one more
+                if (idx2 < high)
+                {
+                    this->op();
+                }
+            }
         }
 
         // Copy the now sorted subsection of the work array into the real array
         for (int i = low; i < high; i++)
         {
+            // One operation per copy
             this->op();
             li[i] = work[i];
         }
@@ -65,5 +80,7 @@ private:
             // Merge the resulting sorted sub-arrays
             merge(li, low, high, mid);
         }
+        // One operation in if block
+        this->op();
     }
 };

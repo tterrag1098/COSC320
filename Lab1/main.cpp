@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <list>
 #include <stdlib.h>
 
@@ -41,32 +42,34 @@ void fillRandom(int arr[size])
     }
 }
 
+static std::ofstream out;
+
 // Prints an array to the console
 template <size_t size>
 void print(int arr[size])
 {
-    std::cout << "[";
+    out << "[";
     for (int i = 0; i < size; i++)
     {
-        std::cout << arr[i];
+        out << arr[i];
         if (i != size - 1)
         {
-            std::cout << ", ";
+            out << ", ";
         }
     }
-    std::cout << "]" << end1;
+    out << "]" << end1;
 }
 
 // Sorts an array, using a given sorter, and prints out the intermediate steps
 template<size_t size>
 void sort(int arr[size], Sorter<int, size>* sorter)
 {
-    std::cout << "Before sort:" << end1 << "\t";
+    out << "Before sort:" << end1 << "\t";
     print<size>(arr);
     sorter->sort(arr);
-    std::cout << "After sort:" << end1 << "\t";
+    out << "After sort:" << end1 << "\t";
     print<size>(arr);
-    std::cout << "Operations: " << sorter->getOpCount() << end2;
+    out << "Operations: " << sorter->getOpCount() << end2;
 }
 
 // Tests a sorter, printing out its name/size, and the type of each test
@@ -75,17 +78,17 @@ void test(Sorter<int, size>* sorter)
 {
     int arr[size] = {0};
 
-    std::cout << sorter->getName() << " sort, with " << size << " elements:" << end1;
+    out << sorter->getName() << " sort, with " << size << " elements:" << end1;
 
-    std::cout << "Ascending order:" << end2;
+    out << "Ascending order:" << end2;
     fillAscending<size>(arr);
     sort(arr, sorter);
 
-    std::cout << "Descending order:" << end2;
+    out << "Descending order:" << end2;
     fillDescending<size>(arr);
     sort(arr, sorter);
 
-    std::cout << "Random order:" << end2;
+    out << "Random order:" << end2;
     fillRandom<size>(arr);
     sort(arr, sorter);
 
@@ -94,6 +97,8 @@ void test(Sorter<int, size>* sorter)
 
 int main()
 {
+    out.open("output.txt");
+
     test(new InsertionSorter<20>());
     test(new InsertionSorter<100>());
 
@@ -105,4 +110,6 @@ int main()
 
     test(new MergeSorter<20>());
     test(new MergeSorter<100>());
+
+    std::cout << "See output.txt for sorting information" << std::endl;
 }

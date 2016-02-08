@@ -1,23 +1,38 @@
 # depslib dependency file v1.0
-1454888515 source:x:\development\cosc320\lab1\main.cpp
+1454905607 source:x:\development\cosc320\lab1\main.cpp
 	<iostream>
 	<list>
 	<stdlib.h>
 	"src/InsertionSorter.cpp"
 	"src/SelectionSorter.cpp"
+	"src/BubbleSorter.cpp"
+	"src/MergeSorter.cpp"
 
 1454888385 source:x:\development\cosc320\lab1\src\insertionsorter.cpp
 	"Sorter.h"
 
-1454888306 x:\development\cosc320\lab1\include\sorter.h
+1454906243 x:\development\cosc320\lab1\include\sorter.h
 	"stddef.h"
+	<string>
 
-1454888385 x:\development\cosc320\lab1\src\insertionsorter.cpp
+1454905586 x:\development\cosc320\lab1\src\insertionsorter.cpp
 	"Sorter.h"
 
 1454888823 source:x:\development\cosc320\lab1\src\selectionsorter.cpp
 	<Sorter.h>
 
-1454888823 x:\development\cosc320\lab1\src\selectionsorter.cpp
+1454905594 x:\development\cosc320\lab1\src\selectionsorter.cpp
+	<Sorter.h>
+
+1454897245 source:x:\development\cosc320\lab1\src\bubblesorter.cpp
+	<Sorter.h>
+
+1454903543 source:x:\development\cosc320\lab1\src\mergesorter.cpp
+	<Sorter.h>
+
+1454905590 x:\development\cosc320\lab1\src\bubblesorter.cpp
+	<Sorter.h>
+
+1454905592 x:\development\cosc320\lab1\src\mergesorter.cpp
 	<Sorter.h>
 

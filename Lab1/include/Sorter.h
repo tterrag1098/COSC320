@@ -2,15 +2,17 @@
 #define SORTER_H
 
 #include "stddef.h"
+#include <string>
 
 template <typename T, size_t N>
 class Sorter
 {
 public:
-    Sorter(){};
+    Sorter(std::string name) : name(name){};
     virtual ~Sorter(){};
     virtual void sort(T li[N]) = 0;
     int getOpCount() { return opCount; }
+    std::string getName() { return name; };
 protected:
     void reset() { opCount = 0; }
     void op() { opCount++; }
@@ -18,13 +20,14 @@ protected:
     {
         T temp = a;
         op();
-        a=b;
+        a = b;
         op();
-        b=temp;
+        b = temp;
         op();
     }
 private:
     int opCount;
+    std::string name;
 };
 
 #endif // SORTER_H

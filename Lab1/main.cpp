@@ -10,6 +10,7 @@
 #define end1 std::endl
 #define end2 std::endl << std::endl
 
+// Fills a given array with ascending integers from 1 to size
 template <size_t size>
 void fillAscending(int arr[size])
 {
@@ -19,6 +20,7 @@ void fillAscending(int arr[size])
     }
 }
 
+// Fills a given array with descending integers from size to 1
 template <size_t size>
 void fillDescending(int arr[size])
 {
@@ -28,6 +30,7 @@ void fillDescending(int arr[size])
     }
 }
 
+// Fills a given array of with random integers ranging from 1 to size
 template <size_t size>
 void fillRandom(int arr[size])
 {
@@ -38,6 +41,7 @@ void fillRandom(int arr[size])
     }
 }
 
+// Prints an array to the console
 template <size_t size>
 void print(int arr[size])
 {
@@ -53,23 +57,25 @@ void print(int arr[size])
     std::cout << "]" << end1;
 }
 
+// Sorts an array, using a given sorter, and prints out the intermediate steps
 template<size_t size>
-void sort(int arr[size], Sorter<int, size>& sorter)
+void sort(int arr[size], Sorter<int, size>* sorter)
 {
     std::cout << "Before sort:" << end1 << "\t";
     print<size>(arr);
-    sorter.sort(arr);
+    sorter->sort(arr);
     std::cout << "After sort:" << end1 << "\t";
     print<size>(arr);
-    std::cout << "Operations: " << sorter.getOpCount() << end2;
+    std::cout << "Operations: " << sorter->getOpCount() << end2;
 }
 
+// Tests a sorter, printing out its name/size, and the type of each test
 template<size_t size>
-void test(std::string name, Sorter<int, size>& sorter)
+void test(Sorter<int, size>* sorter)
 {
     int arr[size] = {0};
 
-    std::cout << name << " sort, with " << size << " elements:" << end1;
+    std::cout << sorter->getName() << " sort, with " << size << " elements:" << end1;
 
     std::cout << "Ascending order:" << end2;
     fillAscending<size>(arr);
@@ -82,30 +88,21 @@ void test(std::string name, Sorter<int, size>& sorter)
     std::cout << "Random order:" << end2;
     fillRandom<size>(arr);
     sort(arr, sorter);
+
+    delete sorter;
 }
 
 int main()
 {
-    InsertionSorter<20> insertion20;
-    InsertionSorter<100> insertion100;
+    test(new InsertionSorter<20>());
+    test(new InsertionSorter<100>());
 
-    test("Insertion", insertion20);
-    test("Insertion", insertion100);
+    test(new SelectionSorter<20>());
+    test(new SelectionSorter<100>());
 
-    SelectionSorter<20> selection20;
-    SelectionSorter<100> selection100;
-    test("Selection", selection20);
-    test("Selection", selection100);
+    test(new BubbleSorter<20>());
+    test(new BubbleSorter<100>());
 
-    BubbleSorter<20> bubble20;
-    BubbleSorter<100> bubble100;
-
-    test("Bubble", bubble20);
-    test("Bubble", bubble100);
-
-    MergeSorter<20> merge20;
-    MergeSorter<100> merge100;
-
-    test("Merge", merge20);
-    test("Merge", merge100);
+    test(new MergeSorter<20>());
+    test(new MergeSorter<100>());
 }

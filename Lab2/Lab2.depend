@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1385316878 source:p:\dev\cosc320\lab2\main.cpp
+	<iostream>
+
+1455049523 source:p:\dev\cosc320\lab2\src\linkedlist.cpp
+	"LinkedList.h"
+	<iostream>
+
+1455049923 p:\dev\cosc320\lab2\include\linkedlist.h
+	"Node.h"
+
+1455049364 source:p:\dev\cosc320\lab2\src\node.cpp
+	"Node.h"
+	<iostream>
+
+1455049929 p:\dev\cosc320\lab2\include\node.h
+
+1455591464 source:x:\development\cosc320\lab2\main.cpp
+	<iostream>
+	<istream>
+	<cstdlib>
+	"LinkedList.h"
+
+1455593350 x:\development\cosc320\lab2\include\linkedlist.h
+	"Node.h"
+
+1455499928 x:\development\cosc320\lab2\include\node.h
+	<string>
+
+1455591512 source:x:\development\cosc320\lab2\src\node.cpp
+	"Node.h"
+	<iostream>
+
+1455593329 source:x:\development\cosc320\lab2\src\linkedlist.cpp
+	"LinkedList.h"
+	<iostream>
+

@@ -8,7 +8,7 @@ class LinkedList
     public:
         LinkedList();
         ~LinkedList();
-        void insertNode(int id, StudentInfo info = StudentInfo{"Unknown", "Unknown"});
+        void insertNode(int id, StudentInfo info);
         void deleteNode(int id);
         void print();
         void searchNode(int id);

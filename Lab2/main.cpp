@@ -14,6 +14,7 @@ int main()
     cout << instructions;
 
     string input;
+    // Read input until "exit" is read, then terminate
     while (cin >> input, input != "exit")
     {
         if (input == "insert")
@@ -25,6 +26,7 @@ int main()
             cin >> first;
             cout << "Enter last name: ";
             cin >> last;
+            // Used throughout, atoi(foo.c_str()) converts a string into an int
             list.insertNode(atoi(idStr.c_str()), {first, last});
         }
         else if (input == "delete")

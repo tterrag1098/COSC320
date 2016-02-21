@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1454905607 source:x:\development\cosc320\lab1\main.cpp
+1455006327 source:x:\development\cosc320\lab1\main.cpp
 	<iostream>
+	<fstream>
 	<list>
 	<stdlib.h>
 	"src/InsertionSorter.cpp"
@@ -15,13 +16,13 @@
 	"stddef.h"
 	<string>
 
-1454905586 x:\development\cosc320\lab1\src\insertionsorter.cpp
+1454962400 x:\development\cosc320\lab1\src\insertionsorter.cpp
 	"Sorter.h"
 
 1454962116 source:x:\development\cosc320\lab1\src\selectionsorter.cpp
 	<Sorter.h>
 
-1454905594 x:\development\cosc320\lab1\src\selectionsorter.cpp
+1454962116 x:\development\cosc320\lab1\src\selectionsorter.cpp
 	<Sorter.h>
 
 1454962437 source:x:\development\cosc320\lab1\src\bubblesorter.cpp
@@ -30,9 +31,9 @@
 1454962337 source:x:\development\cosc320\lab1\src\mergesorter.cpp
 	<Sorter.h>
 
-1454905590 x:\development\cosc320\lab1\src\bubblesorter.cpp
+1454962437 x:\development\cosc320\lab1\src\bubblesorter.cpp
 	<Sorter.h>
 
-1454905592 x:\development\cosc320\lab1\src\mergesorter.cpp
+1454962337 x:\development\cosc320\lab1\src\mergesorter.cpp
 	<Sorter.h>
 

@@ -1,24 +1,28 @@
 #include "LinkedList.h"
+#include "Node.cpp"
 #include <iostream>
 
-LinkedList::LinkedList()
+template <typename T>
+LinkedList<T>::LinkedList()
 {
     list = NULL;
 }
 
-LinkedList::~LinkedList()
+template <typename T>
+LinkedList<T>::~LinkedList()
 {
     while (list)
     {
-        Node* n = list;
+        Node<T>* n = list;
         list = n->next;
         delete n;
     }
 }
 
-Node* LinkedList::createNode(int id)
+template <typename T>
+Node<T>* LinkedList<T>::createNode(int id)
 {
-    return new Node(id);
+    return new Node<T>(id);
 }
 
 /*
@@ -30,9 +34,10 @@ Node* LinkedList::createNode(int id)
  This method NEVER returns the exact node requested, but instead the previous one.
  This is to allow proper context to add/remove nodes.
 */
-Node* LinkedList::searchLocation(int id, bool eq)
+template <typename T>
+Node<T>* LinkedList<T>::searchLocation(int id, bool eq)
 {
-    Node* n = list;
+    Node<T>* n = list;
     if (n)
     {
         // If the root node ID is greater than the search ID, short circuit and return NULL
@@ -42,7 +47,7 @@ Node* LinkedList::searchLocation(int id, bool eq)
             return NULL;
         }
 
-        Node* search = n->next;
+        Node<T>* search = n->next;
         // Iterate through the nodes until we reach one that is greater than or equal to the given node
         while (search && search->id < id)
         {
@@ -56,16 +61,17 @@ Node* LinkedList::searchLocation(int id, bool eq)
     return n;
 }
 
-void LinkedList::insertNode(int id, StudentInfo info)
+template <typename T>
+void LinkedList<T>::insertNode(int id, T data)
 {
-    Node* n = createNode(id);
-    n->info = info;
+    Node<T>* n = createNode(id);
+    n->data = data;
     // Find the node before our insert location
-    Node* insert = searchLocation(id, false);
+    Node<T>* insert = searchLocation(id, false);
     if (insert)
     {
         // Cache the previous next value
-        Node* prev_next = insert->next;
+        Node<T>* prev_next = insert->next;
         // Insert the new node between the found node and its next
         insert->next = n;
         // Set the new node's next to the cached one
@@ -75,17 +81,18 @@ void LinkedList::insertNode(int id, StudentInfo info)
     {
         // If searchLocation returned null, this can only mean that the entire list is greater than the given ID
         // Since this is the case, we must replace the root
-        Node* prev_root = list;
+        Node<T>* prev_root = list;
         list = n;
         // And set the second element of the list to the old root
         list->next = prev_root;
     }
 }
 
-void LinkedList::searchNode(int id)
+template <typename T>
+void LinkedList<T>::searchNode(int id)
 {
     // Search for a node with forced equality
-    Node* found = searchLocation(id, true);
+    Node<T>* found = searchLocation(id, true);
     // If the found node's next is not NULL it must be equal by the contract of searchLocation
     if (found && found->next)
     {
@@ -105,13 +112,14 @@ void LinkedList::searchNode(int id)
     }
 }
 
-void LinkedList::deleteNode(int id)
+template <typename T>
+void LinkedList<T>::deleteNode(int id)
 {
     // If the root matches the given ID, short circuit and perform special logic for root deletion
     if (list && id == list->id)
     {
         // Set the new root to the old root's next, then delete the old reference
-        Node* old = list;
+        Node<T>* old = list;
         list = list->next;
         old->print();
         delete old;
@@ -119,12 +127,12 @@ void LinkedList::deleteNode(int id)
     }
 
     // Search for a node with forced equality
-    Node* found = searchLocation(id, true);
+    Node<T>* found = searchLocation(id, true);
     // If the found node's next is not NULL it must be equal by the contract of searchLocation
     if (found && found->next)
     {
         // Set the found node's next to its next's next. This cuts the removed node out of the list and effectively removes it
-        Node* removed = found->next;
+        Node<T>* removed = found->next;
         found->next = removed->next;
         // Finally print and delete the node
         removed->print();
@@ -136,9 +144,10 @@ void LinkedList::deleteNode(int id)
     }
 }
 
-void LinkedList::print()
+template <typename T>
+void LinkedList<T>::print()
 {
-    Node* root = list;
+    Node<T>* root = list;
 
     // Special case for empty list
     if (!root)

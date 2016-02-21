@@ -1,19 +1,17 @@
 #include "Node.h"
 #include <iostream>
 
-Node::Node(int id) : id(id){}
+template <typename T>
+Node<T>::Node(int id) : id(id){}
 
-Node::~Node(){}
+template <typename T>
+Node<T>::~Node(){}
 
 // Print the ID and the student info
-void Node::print()
+template <typename T>
+void Node<T>::print()
 {
     std::cout << "ID: " << id << " -> ";
-    info.print();
+    data.print();
 }
 
-// Print first and last name
-void StudentInfo::print()
-{
-    std::cout << "Name: " << first_name << " " << last_name << std::endl;
-}

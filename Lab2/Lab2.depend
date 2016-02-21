@@ -15,23 +15,34 @@
 
 1455049929 p:\dev\cosc320\lab2\include\node.h
 
-1455591464 source:x:\development\cosc320\lab2\main.cpp
+1456020911 source:x:\development\cosc320\lab2\main.cpp
 	<iostream>
 	<istream>
 	<cstdlib>
-	"LinkedList.h"
+	"src/LinkedList.cpp"
 
-1455593350 x:\development\cosc320\lab2\include\linkedlist.h
+1456019580 x:\development\cosc320\lab2\include\linkedlist.h
 	"Node.h"
 
-1455499928 x:\development\cosc320\lab2\include\node.h
+1456020814 x:\development\cosc320\lab2\include\node.h
 	<string>
 
-1455591512 source:x:\development\cosc320\lab2\src\node.cpp
+1456020291 source:x:\development\cosc320\lab2\src\node.cpp
 	"Node.h"
+	"LinkedList.h"
 	<iostream>
 
-1455593329 source:x:\development\cosc320\lab2\src\linkedlist.cpp
+1456020827 source:x:\development\cosc320\lab2\src\linkedlist.cpp
 	"LinkedList.h"
+	"Node.cpp"
+	<iostream>
+
+1456020827 x:\development\cosc320\lab2\src\linkedlist.cpp
+	"LinkedList.h"
+	"Node.cpp"
+	<iostream>
+
+1456020954 x:\development\cosc320\lab2\src\node.cpp
+	"Node.h"
 	<iostream>
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <istream>
 #include <cstdlib>
-#include "src/LinkedList.cpp"
+#include "LinkedList.cpp"
 
 using namespace std;
 

@@ -3,10 +3,10 @@
 #include <list>
 #include <stdlib.h>
 
-#include "src/InsertionSorter.cpp"
-#include "src/SelectionSorter.cpp"
-#include "src/BubbleSorter.cpp"
-#include "src/MergeSorter.cpp"
+#include "InsertionSorter.cpp"
+#include "SelectionSorter.cpp"
+#include "BubbleSorter.cpp"
+#include "MergeSorter.cpp"
 
 #define end1 std::endl
 #define end2 std::endl << std::endl

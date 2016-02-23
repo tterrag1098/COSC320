@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1456217496 source:x:\development\cosc482\lab3\main.cpp
+	<iostream>
+	<cstdlib>
+	"Heap.h"
+
+1456217428 source:x:\development\cosc482\lab3\heap.cpp
+	"Heap.h"
+	<cmath>
+	<string>
+	<iostream>
+	<iomanip>
+	<climits>
+
+1456217058 x:\development\cosc482\lab3\heap.h
+	<stddef.h>
+

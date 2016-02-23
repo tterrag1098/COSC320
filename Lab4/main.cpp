@@ -13,7 +13,7 @@
 template <size_t size>
 void fillRandom(int arr[size])
 {
-    srand(8);
+    srand(4);
     for (int i = 0; i < size; i++)
     {
         arr[i] = (rand() % 100) + 1;

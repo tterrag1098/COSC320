@@ -4,27 +4,26 @@
 #include <stdlib.h>
 
 #include "QuickSorter.h"
+#include "CountingSorter.h"
 
 #define end1 std::endl
 #define end2 std::endl << std::endl
 #define section "==============================================="
 
-// Fills a given array of with random integers ranging from 1 to 100
-template <size_t size>
-void fillRandom(int arr[size])
+// Fills a given array of with random integers ranging from 1 to size
+void fillRandom(int *arr, int size, int min, int max)
 {
-    srand(4);
+    srand(8);
     for (int i = 0; i < size; i++)
     {
-        arr[i] = (rand() % 100) + 1;
+        arr[i] = (rand() % (max - min)) + min;
     }
 }
 
 static std::ofstream out;
 
 // Prints an array to the console
-template <size_t size>
-void print(int arr[size])
+void print(int *arr, int size)
 {
     out << "[";
     for (int i = 0; i < size; i++)
@@ -39,26 +38,26 @@ void print(int arr[size])
 }
 
 // Sorts an array, using a given sorter, and prints out the intermediate steps
-template<size_t size>
-void sort(int arr[size], Sorter<int, size>* sorter)
+void sort(int *arr, int size, Sorter<int>* sorter)
 {
     out << "\tBefore sort: ";
-    print<size>(arr);
-    sorter->sort(arr);
+    print(arr, size);
+    sorter->sort(arr, size);
     out << "\tAfter sort: ";
-    print<size>(arr);
+    print(arr, size);
+    out << "\tOperations: " << sorter->getOpCount() << end2;
 }
 
 // Tests a sorter, printing out its name/size, and the type of each test
-template<size_t size>
-void test(Sorter<int, size>* sorter)
+void test(Sorter<int>* sorter, int size, int min, int max)
 {
-    int arr[size] = {0};
+    int *arr = new int[size];
 
     out << sorter->getName() << " sort, with " << size << " elements:" << end2;
 
-    fillRandom<size>(arr);
-    sort(arr, sorter);
+    out << "Random order:" << end1;
+    fillRandom(arr, size, min, max);
+    sort(arr, size, sorter);
 
     out << section << end2;
     delete sorter;
@@ -69,7 +68,11 @@ int main()
     out.open("output.txt");
     out << section << end2;
 
-    test(new QuickSorter<30>(iterative));
+    test(new QuickSorter(one), 30, 1, 100);
+    test(new QuickSorter(two), 30, 1, 100);
     
+    test(new CountingSorter(copy, 100), 30, 1, 100);
+    test(new CountingSorter(inplace, 100), 30, 1, 100);
+
     std::cout << "See output.txt for sorting information" << std::endl;
 }

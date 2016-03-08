@@ -1,14 +1,24 @@
+#ifndef QUICK_SORTER_H
+#define QUICK_SORTER_H
+
 #include "Sorter.h"
 #include <stddef.h>
 
-enum Partition { recursive, iterative };
+enum Partition { one, two };
 
-template <size_t N>
-class QuickSorter : public Sorter<int, N>
+class QuickSorter : public Sorter<int>
 {
 public:
-  QuickSorter<N> (Partition p) : partition(p), Sorter<int, N>("Quicksort"){}
-  void sort(int arr[N]) override;
+  QuickSorter (Partition p);
+  ~QuickSorter ();
+  void sort(int *arr, int size) override;
 private:
-  Partition partition;
+  int size;
+  
+  void sort(int *arr, int p, int r);
+  int partition(int *arr, int p, int r);
+  void print(int *arr, int size);
+  Partition type;
 };
+
+#endif

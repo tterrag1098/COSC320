@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1457928339 source:c:\development\cosc320\lab4\countingsorter.cpp
+	"CountingSorter.h"
+
+1457843441 c:\development\cosc320\lab4\countingsorter.h
+	"Sorter.h"
+
+1457843441 c:\development\cosc320\lab4\sorter.h
+	"stddef.h"
+	<string>
+
+1458419868 source:c:\development\cosc320\lab4\main.cpp
+	<iostream>
+	<fstream>
+	<list>
+	<stdlib.h>
+	"QuickSorter.h"
+	"CountingSorter.h"
+	"BucketSorter.h"
+
+1457843441 c:\development\cosc320\lab4\quicksorter.h
+	"Sorter.h"
+	<stddef.h>
+
+1457928393 source:c:\development\cosc320\lab4\quicksorter.cpp
+	"QuickSorter.h"
+	<iostream>
+
+1458421070 source:c:\development\cosc320\lab4\bucketsorter.cpp
+	"BucketSorter.h"
+	"InsertionSorter.h"
+
+1458421078 c:\development\cosc320\lab4\bucketsorter.h
+	"Sorter.h"
+
+1458419480 source:c:\development\cosc320\lab4\insertionsorter.cpp
+	"Sorter.h"
+	"InsertionSorter.h"
+
+1458419431 c:\development\cosc320\lab4\insertionsorter.h
+	"Sorter.h"
+

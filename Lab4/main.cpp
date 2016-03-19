@@ -5,6 +5,7 @@
 
 #include "QuickSorter.h"
 #include "CountingSorter.h"
+#include "BucketSorter.h"
 
 #define end1 std::endl
 #define end2 std::endl << std::endl
@@ -70,9 +71,11 @@ int main()
 
     test(new QuickSorter(one), 30, 1, 100);
     test(new QuickSorter(two), 30, 1, 100);
-    
-    test(new CountingSorter(copy, 100), 30, 1, 100);
-    test(new CountingSorter(inplace, 100), 30, 1, 100);
+
+    test(new CountingSorter(copy, 100), 40, 0, 25);
+    test(new CountingSorter(inplace, 100), 40, 0, 25);
+
+    test(new BucketSorter(100), 100, 0, 100);
 
     std::cout << "See output.txt for sorting information" << std::endl;
 }

@@ -13,7 +13,7 @@ class Printable
 template <typename T>
 class LinkedList : public Printable
 {
-    static_assert(std::is_base_of<Printable, T>::value, "T must derive from Drawable");
+    static_assert(std::is_base_of<Printable, T>::value, "T must derive from Printable");
 
     public:
         LinkedList();

@@ -1,4 +1,4 @@
-OBJS = main.o QuickSorter.o CountingSorter.o
+OBJS = main.o QuickSorter.o CountingSorter.o BucketSorter.o InsertionSorter.o
 CC = g++
 DEBUG = -g
 CFLAGS = -c -std=c++11 -Wall $(DEBUG)
@@ -14,8 +14,14 @@ QuickSorter.o:
 CountingSorter.o:
 	$(CC) $(CFLAGS) CountingSorter.cpp CountingSorter.h Sorter.h
 
+InsertionSorter.o:
+	$(CC) $(CFLAGS) InsertionSorter.cpp InsertionSorter.h Sorter.h
+
+BucketSorter.o:
+	$(CC) $(CFLAGS) BucketSorter.cpp BucketSorter.h InsertionSorter.h Sorter.h
+
 main.o:
-	$(CC) $(CFLAGS) main.cpp QuickSorter.cpp QuickSorter.h Sorter.h
+	$(CC) $(CFLAGS) main.cpp QuickSorter.h CountingSorter.h BucketSorter.h Sorter.h
 
 clean:
 	rm *.o *.gch *~ $(EXE)

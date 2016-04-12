@@ -293,7 +293,7 @@ int RBT::print(TNode *tree, int is_left, int offset, int depth, char s[20][255])
 
     if (!tree) return 0;
 
-    sprintf(b, "(%03d)", tree->data);
+    sprintf(b, "(%03d)-" + tree->color, tree->data);
 
     int left  = print(tree->left,  1, offset,                depth + 1, s);
     int right = print(tree->right, 0, offset + left + width, depth + 1, s);

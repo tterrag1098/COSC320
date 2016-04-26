@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "RBT.h"
 
 using namespace std;
@@ -45,7 +46,7 @@ int main() {
             cout << "\nEnter type:\nio | preo | posto | a\n";
 	    string type;
 	    cin >> type;
-	    
+
 	    if (type == "a")
 	    {
 	      bst.print();

@@ -30,7 +30,11 @@ TNode *RBT::nil = new TNode();
  
 RBT::RBT()
 {
-
+  nil->parent = nil;
+  nil->left = nil;
+  nil->right = nil;
+  
+  root = nil;
 }
 
 RBT::~RBT()
@@ -176,9 +180,32 @@ void RBT::insert(int data)
   insertFixUp(newNode);
 }
 
-void RBT::insertFixUp(TNode* x)
+void RBT::insertFixUp(TNode* z)
 {
+  if (z->parent->color == BLACK) return;
   
+  TNode *y = z->parent->parent;
+  y = z->parent == y->left ? y->right : y->left;
+  
+  if (y->color == RED)
+  {
+    z->parent->color = y->color = BLACK;
+    z->parent->parent->color = RED;
+    insertFixUp(z->parent->parent);
+  }
+  else
+  {
+    if ((z == z->parent->right) == (z->parent == z->parent->parent->left))
+    {
+      z = z->parent;
+      if (z == z->parent->right) leftRotate(z);
+      else rightRotate(z);
+    }
+    z->parent->color = BLACK;
+    z->parent->parent->color = RED;
+    if (z->parent == z->parent->parent->left) rightRotate(z);
+    else leftRotate(z);
+  }
 }
 
 void RBT::del(int data)
@@ -291,9 +318,9 @@ int RBT::print(TNode *tree, int is_left, int offset, int depth, char s[20][255])
     char b[20];
     int width = 5;
 
-    if (!tree) return 0;
+    if (tree == nil) return 0;
 
-    sprintf(b, "(%03d)-" + tree->color, tree->data);
+    sprintf(b, "(%03d)-", tree->data);
 
     int left  = print(tree->left,  1, offset,                depth + 1, s);
     int right = print(tree->right, 0, offset + left + width, depth + 1, s);
@@ -314,7 +341,7 @@ int RBT::print(TNode *tree, int is_left, int offset, int depth, char s[20][255])
         for (int i = 0; i < left + width; i++)
             s[depth - 1][offset - width/2 + i] = '-';
 
-        s[depth - 1][offset + left + width/2] = '.';
+        s[depth - 1][offset + left + width/2] = '.';	
     }
 #else
     for (int i = 0; i < width; i++)

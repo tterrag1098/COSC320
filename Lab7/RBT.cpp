@@ -23,18 +23,18 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-
+#define COMPACT
 #include "RBT.h"
 
 TNode *RBT::nil = new TNode();
 
 RBT::RBT()
 {
-  nil->parent = nil;
-  nil->left = nil;
-  nil->right = nil;
+    nil->parent = nil;
+    nil->left = nil;
+    nil->right = nil;
 
-  root = nil;
+    root = nil;
 }
 
 RBT::~RBT()
@@ -44,278 +44,333 @@ RBT::~RBT()
 
 TNode* RBT::max(TNode* x)
 {
-  return x->right != nil ? max(x->right) : x;
+    return x->right != nil ? max(x->right) : x;
 }
 
 TNode* RBT::min(TNode* x)
 {
-  return x->left != nil ? min(x->left) : x;
+    return x->left != nil ? min(x->left) : x;
 }
 
 TNode* RBT::successor(TNode* x)
 {
-  if (x->right != nil)
-  {
-    return min(x->right);
-  }
-  TNode *y = x->parent;
-  while (y != nil && x == y->right)
-  {
-    x = y;
-    y = y->parent;
-  }
-  return y;
+    if (x->right != nil)
+    {
+        return min(x->right);
+    }
+    TNode *y = x->parent;
+    while (y != nil && x == y->right)
+    {
+        x = y;
+        y = y->parent;
+    }
+    return y;
 }
 
 TNode* RBT::predecessor(TNode* x)
 {
-  if (x->left != nil)
-  {
-    return max(x->left);
-  }
-  TNode* y = x->parent;
-  while (y != nil && x == y->left);
-  {
-    x = y;
-    y = y->parent;
-  }
-  return y;
+    if (x->left != nil)
+    {
+        return max(x->left);
+    }
+    TNode* y = x->parent;
+    while (y != nil && x == y->left);
+    {
+        x = y;
+        y = y->parent;
+    }
+    return y;
 }
 
 TNode* RBT::search(int data)
 {
-  return search(root, data);
+    return search(root, data);
 }
 
 TNode* RBT::search(TNode* from, int data)
 {
-  if (from == nil || from->data == data) return from;
-  if (data < from->data) return search(from->left, data);
-  else return search(from->right, data);
+    if (from == nil || from->data == data) return from;
+    if (data < from->data) return search(from->left, data);
+    else return search(from->right, data);
 }
 
 void RBT::leftRotate(TNode* x)
 {
-  TNode *y = x->right;
-  x->right = y->left;
-  y->left->parent= x;
-  y->parent = x->parent;
+    TNode *y = x->right;
+    x->right = y->left;
+    y->left->parent= x;
+    y->parent = x->parent;
 
-  if (x->parent == nil)
-  {
-    root = y;
-  }
-  else if (x == x->parent->left)
-  {
-    x->parent->left = y;
-  }
-  else
-  {
-    x->parent->right = y;
-  }
+    if (x->parent == nil)
+    {
+        root = y;
+    }
+    else if (x == x->parent->left)
+    {
+        x->parent->left = y;
+    }
+    else
+    {
+        x->parent->right = y;
+    }
 
-  y->left = x;
-  x->parent = y;
+    y->left = x;
+    x->parent = y;
 }
 
 void RBT::rightRotate(TNode* x)
 {
-  TNode *y = x->left;
-  x->left = y->right;
-  y->right->parent= x;
-  y->parent = x->parent;
+    TNode *y = x->left;
+    x->left = y->right;
+    y->right->parent= x;
+    y->parent = x->parent;
 
-  if (x->parent == nil)
-  {
-    root = y;
-  }
-  else if (x == x->parent->right)
-  {
-    x->parent->right = y;
-  }
-  else
-  {
-    x->parent->left = y;
-  }
+    if (x->parent == nil)
+    {
+        root = y;
+    }
+    else if (x == x->parent->right)
+    {
+        x->parent->right = y;
+    }
+    else
+    {
+        x->parent->left = y;
+    }
 
-  y->right = x;
-  x->parent = y;
+    y->right = x;
+    x->parent = y;
 }
 
 void RBT::insert(int data)
 {
-  TNode *x = root;
-  TNode *y = nil;
-  while (x != nil)
-  {
-    y = x;
-    if (data < x->data)
+    TNode *x = root;
+    TNode *y = nil;
+    while (x != nil)
     {
-      x = x->left;
+        y = x;
+        if (data < x->data)
+        {
+            x = x->left;
+        }
+        else
+        {
+            x = x->right;
+        }
+    }
+
+    TNode *newNode = new TNode();
+    newNode->data = data;
+    newNode->parent = y;
+    if (y == nil)
+    {
+        // Empty tree
+        x = root = newNode;
+        newNode->color = BLACK;
+        return;
+    }
+    else if (data < y->data)
+    {
+        y->left = newNode;
     }
     else
     {
-      x = x->right;
+        y->right = newNode;
     }
-  }
 
-  TNode *newNode = new TNode();
-  newNode->data = data;
-  newNode->parent = y;
-  if (y == nil)
-  {
-    // Empty tree
-    x = root = newNode;
-    newNode->color = BLACK;
-    return;
-  }
-  else if (data < y->data)
-  {
-    y->left = newNode;
-  }
-  else
-  {
-    y->right = newNode;
-  }
-
-  newNode->color = RED;
-  print();
-  insertFixUp(newNode);
-  print();
+    newNode->color = RED;
+    print();
+    insertFixUp(newNode);
+    print();
 }
 
 void RBT::insertFixUp(TNode* z)
 {
-  if (z->parent->color == BLACK) return;
+    if (z->parent->color == BLACK) return;
 
-  TNode *y = z->parent->parent;
-  y = z->parent == y->left ? y->right : y->left;
+    TNode *y = z->parent->parent;
+    y = z->parent == y->left ? y->right : y->left;
 
-  if (y->color == RED)
-  {
-    z->parent->color = y->color = BLACK;
-    z->parent->parent->color = RED;
-    insertFixUp(z->parent->parent);
-  }
-  else
-  {
-    if ((z == z->parent->right) == (y == z->parent->parent->right))
+    if (y->color == RED)
     {
-      TNode *q = z;
-      z = z->parent;
-      if (q == q->parent->right) leftRotate(z);
-      else rightRotate(z);
+        z->parent->color = y->color = BLACK;
+        z->parent->parent->color = RED;
+        insertFixUp(z->parent->parent);
     }
-    z->parent->color = BLACK;
-    z->parent->parent->color = RED;
-    if (z->parent == z->parent->parent->left) rightRotate(z->parent->parent);
-    else leftRotate(z->parent->parent);
-  }
+    else
+    {
+        if ((z == z->parent->right) == (y == z->parent->parent->right))
+        {
+            TNode *q = z;
+            z = z->parent;
+            if (q == q->parent->right) leftRotate(z);
+            else rightRotate(z);
+        }
+        z->parent->color = BLACK;
+        z->parent->parent->color = RED;
+        if (z->parent == z->parent->parent->left) rightRotate(z->parent->parent);
+        else leftRotate(z->parent->parent);
+    }
 
-  root->color = BLACK;
+    root->color = BLACK;
 }
 
 void RBT::del(int data)
 {
-  TNode *z = search(data);
-  if (z == nil) return;
+    TNode *z = search(data);
+    if (z == nil) return;
 
-  TNode *x, *y;
-  x = y = NULL;
+    TNode *x, *y;
+    x = y = NULL;
 
-  if (z->left == nil || z->right == nil)
-  {
-    y = z;
-  }
-  else
-  {
-    y = successor(z);
-  }
+    if (z->left == nil || z->right == nil)
+    {
+        y = z;
+    }
+    else
+    {
+        y = successor(z);
+    }
 
-  x = y->left != nil ? y->left : y->right;
+    x = y->left != nil ? y->left : y->right != nil ? y->right : NULL;
+    if (!x)
+    {
+        x = new TNode();
+        x->color = BLACK;
+        x->parent = y;
+        x->data = special_data;
+        if (y == y->parent->left) y->left = x;
+        else y->right = x;
+    }
 
-  if (x != nil)
-  {
     x->parent = y->parent;
-  }
 
-  if (y->parent == nil)
-  {
-    root = x;
-  }
-  else if (y == y->parent->left)
-  {
-    y->parent->left = x;
-  }
-  else
-  {
-    y->parent->right = x;
-  }
+    if (y->parent == nil)
+    {
+        root = x;
+    }
+    else if (y == y->parent->left)
+    {
+        y->parent->left = x;
+    }
+    else
+    {
+        y->parent->right = x;
+    }
 
-  if (y != z)
-  {
-    z->data = y->data;
-  }
+    if (y != z)
+    {
+        z->data = y->data;
+    }
 
-  if (y->color == BLACK)
-  {
-    deleteFixUp(x);
-  }
+    print();
+    if (y->color == BLACK)
+    {
+        deleteFixUp(x);
+        print();
+    }
 
-  delete y;
+    delete y;
 }
 
-void RBT::deleteFixUp(TNode* x)
+void RBT::deleteFixUp(TNode* t)
 {
-
+    TNode *x = t;
+    while(x != root && x->color == BLACK)
+    {
+        bool leftchild = x == x->parent->left;
+        TNode *w = leftchild ? x->parent->right : x->parent->left;
+        if (w->color == RED)
+        {
+            w->color = BLACK;
+            x->parent->color = RED;
+            leftchild ? leftRotate(x->parent) : rightRotate(x->parent);
+            w = leftchild ? x->parent->right : x->parent->left;
+        }
+        if (w->left->color == BLACK && w->right->color == BLACK)
+        {
+            w->color = RED;
+            x = x->parent;
+        }
+        else
+        {
+            if (leftchild ? w->right->color == BLACK : w->left->color = BLACK)
+            {
+                w->color = RED;
+                if (leftchild)
+                {
+                    w->left->color = BLACK;
+                    rightRotate(w);
+                    w = x->parent->right;
+                }
+                else
+                {
+                    w->right->color = BLACK;
+                    leftRotate(w);
+                    w = x->parent->left;
+                }
+            }
+            w->color = x->parent->color;
+            x->parent->color = BLACK;
+            leftchild ? w->right->color = BLACK : w->left->color = BLACK;
+            leftchild ? leftRotate(x->parent) : rightRotate(x->parent);
+            x = root;
+        }
+        if (t->data == special_data)
+        {
+            leftchild ? t->parent->left = nil : t->parent->right = nil;
+            delete t;
+        }
+    }
+    x->color = BLACK;
 }
 
 void RBT::inOrder()
 {
-  inOrder(root);
-  std::cout << std::endl;
+    inOrder(root);
+    std::cout << std::endl;
 }
 
 void RBT::inOrder(TNode* from)
 {
-  if (from)
-  {
-    inOrder(from->left);
-    std::cout << from->data << " ";
-    inOrder(from->right);
-  }
+    if (from != nil)
+    {
+        inOrder(from->left);
+        std::cout << from->data << " ";
+        inOrder(from->right);
+    }
 }
 
 void RBT::preOrder()
 {
-  preOrder(root);
-  std::cout << std::endl;
+    preOrder(root);
+    std::cout << std::endl;
 }
 
 void RBT::preOrder(TNode* from)
 {
-  if (from)
-  {
-    std::cout << from->data << " ";
-    preOrder(from->left);
-    preOrder(from->right);
-  }
+    if (from != nil)
+    {
+        std::cout << from->data << " ";
+        preOrder(from->left);
+        preOrder(from->right);
+    }
 }
 
 void RBT::postOrder()
 {
-  postOrder(root);
-  std::cout << std::endl;
+    postOrder(root);
+    std::cout << std::endl;
 }
 
 void RBT::postOrder(TNode* from)
 {
-  if (from)
-  {
-    postOrder(from->left);
-    postOrder(from->right);
-    std::cout << from->data << " ";
-  }
+    if (from != nil)
+    {
+        postOrder(from->left);
+        postOrder(from->right);
+        std::cout << from->data << " ";
+    }
 }
 
 using namespace std;
@@ -325,7 +380,7 @@ int RBT::print(TNode *tree, int is_left, int offset, int depth, char s[20][255])
     char b[20];
     int width = 7;
 
-    if (tree == nil) return 0;
+    if (tree == nil || tree->data == special_data) return 0;
 
     sprintf(b, "(%03d)-%s", tree->data, tree->color == BLACK ? "B" : "R");
 
@@ -336,14 +391,17 @@ int RBT::print(TNode *tree, int is_left, int offset, int depth, char s[20][255])
     for (int i = 0; i < width; i++)
         s[depth][offset + left + i] = b[i];
 
-    if (depth && is_left) {
+    if (depth && is_left)
+    {
 
         for (int i = 0; i < width + right; i++)
             s[depth - 1][offset + left + width/2 + i] = '-';
 
         s[depth - 1][offset + left + width/2] = '.';
 
-    } else if (depth && !is_left) {
+    }
+    else if (depth && !is_left)
+    {
 
         for (int i = 0; i < left + width; i++)
             s[depth - 1][offset - width/2 + i] = '-';
@@ -354,7 +412,8 @@ int RBT::print(TNode *tree, int is_left, int offset, int depth, char s[20][255])
     for (int i = 0; i < width; i++)
         s[2 * depth][offset + left + i] = b[i];
 
-    if (depth && is_left) {
+    if (depth && is_left)
+    {
 
         for (int i = 0; i < width + right; i++)
             s[2 * depth - 1][offset + left + width/2 + i] = '-';
@@ -362,7 +421,9 @@ int RBT::print(TNode *tree, int is_left, int offset, int depth, char s[20][255])
         s[2 * depth - 1][offset + left + width/2] = '+';
         s[2 * depth - 1][offset + left + width + right + width/2] = '+';
 
-    } else if (depth && !is_left) {
+    }
+    else if (depth && !is_left)
+    {
 
         for (int i = 0; i < left + width; i++)
             s[2 * depth - 1][offset - width/2 + i] = '-';

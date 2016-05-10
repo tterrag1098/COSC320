@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1461700704 source:c:\development\cosc320\lab7\main.cpp
+	<iostream>
+	<cstdlib>
+	"RBT.h"
+
+1462908847 c:\development\cosc320\lab7\rbt.h
+	"TNode.h"
+	<iostream>
+	<cstdio>
+
+1461700593 c:\development\cosc320\lab7\tnode.h
+	"RBT.h"
+	"cstddef"
+
+1462908861 source:c:\development\cosc320\lab7\rbt.cpp
+	"RBT.h"
+
+1461700593 source:c:\development\cosc320\lab7\tnode.cpp
+	"TNode.h"
+

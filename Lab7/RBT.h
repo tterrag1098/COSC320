@@ -6,6 +6,7 @@ class TNode;
 #include "TNode.h"
 #include <iostream>
 #include <cstdio>
+#include <climits>
 
 class RBT
 {
